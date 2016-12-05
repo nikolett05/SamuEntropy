@@ -26,7 +26,7 @@ public class NeuronBox implements Cloneable {
     private int type = 1;
 
     public NeuronBox(android.graphics.Bitmap tiles, int length, int width, int height, int numberOfNeurons,
-            android.graphics.Bitmap cover, int x, int y,int covertype) {
+            android.graphics.Bitmap cover, int x, int y, int covertype) {
         this.x = x;
         this.y = y;
         this.tiles = tiles;

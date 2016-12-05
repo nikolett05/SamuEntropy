@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Norbiron Table</string>
     <color name="white">#FFFFFF</color>
+    <string name ="build">BUILD!</string>
+    <string name ="counter">M: 0, G: 0, N: 0</string>
 </resources>

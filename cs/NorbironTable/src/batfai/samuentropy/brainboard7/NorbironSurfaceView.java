@@ -14,14 +14,12 @@ class Nodes {
                 "batfai.samuentropy.brainboard7");
 
         boardPic = android.graphics.BitmapFactory.decodeResource(surfaceView.getResources(), resId);
-
         boardPic = android.graphics.Bitmap.createScaledBitmap(boardPic, 300, 300, false);
 
         resId = surfaceView.getResources().getIdentifier("neuronsprite", "drawable",
                 "batfai.samuentropy.brainboard7");
 
         neuronSprite = android.graphics.BitmapFactory.decodeResource(surfaceView.getResources(), resId);
-
         neuronSprite = android.graphics.Bitmap.createScaledBitmap(neuronSprite, 64 * 2 * 14, 62, false);
 
         resId = surfaceView.getResources().getIdentifier("nandironproci", "drawable",
@@ -113,7 +111,6 @@ public class NorbironSurfaceView extends android.view.SurfaceView implements Run
     public void setScaleFactor(float scaleFactor) {
         this.scaleFactor = scaleFactor;
     }
-
     public float getScaleFactor() {
         return scaleFactor;
     }
@@ -133,9 +130,7 @@ public class NorbironSurfaceView extends android.view.SurfaceView implements Run
         }
         editor.putInt("size", nodeBoxes.size());
         editor.commit();
-
     }
-
     public static void loadData(android.content.SharedPreferences settings)
     {
         for (int i=0; i<settings.getInt("size", 0); i++)
@@ -150,47 +145,37 @@ public class NorbironSurfaceView extends android.view.SurfaceView implements Run
         }
     }
     //END
-
     public NorbironSurfaceView(android.content.Context context) {
         super(context);
         cinit(context);
     }
-
     public NorbironSurfaceView(android.content.Context context,
             android.util.AttributeSet attrs) {
         super(context, attrs);
         cinit(context);
     }
-
     public NorbironSurfaceView(android.content.Context context,
             android.util.AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         cinit(context);
     }
-
     @Override
     protected void onSizeChanged(int newx, int newy, int x, int y) {
-
         super.onSizeChanged(newx, newy, x, y);
         width = newx;
         height = newy;
         swidth = width / 2 - nodes.getBoardPic().getWidth() / 2;
         sheight = height / 2 - nodes.getBoardPic().getHeight() / 2;
-
     }
-
     private void cinit(android.content.Context context) {
-
         this.context = context;
         nodes = new Nodes(this);
         nodeBoxes.clear();
-
         //start
         loadData(PreferenceManager.getDefaultSharedPreferences(context));
         //end
         android.content.Intent intent = ((NeuronGameActivity) context).getIntent();
         android.os.Bundle bundle = intent.getExtras();
-
         if (bundle != null) {
             int i = bundle.getInt("selectedNode");
             android.util.Log.w("alma", "s" + i);
@@ -203,14 +188,12 @@ public class NorbironSurfaceView extends android.view.SurfaceView implements Run
         surfaceHolder.addCallback(new SurfaceEvents(this));
         scaleGestureDetector = new android.view.ScaleGestureDetector(context, new ScaleAdapter(this));
     }
-
     @Override
     public void onDraw(android.graphics.Canvas canvas) {
         if (surfaceHolder.getSurface().isValid()) {
             canvas.save();
             canvas.scale(scaleFactor, scaleFactor);
             canvas.drawColor(android.graphics.Color.BLACK);
-
             for (int i = 0; i < 10; ++i) {
                 for (int j = 0; j < 10; ++j) {
                     canvas.drawBitmap(nodes.getBoardPic(), -startsx + boardx + i * 300, -startsy + boardy + j * 300, null);
@@ -253,7 +236,6 @@ public class NorbironSurfaceView extends android.view.SurfaceView implements Run
         android.content.Intent i = new android.content.Intent(context, NodeActivity.class);
         context.startActivity(i);
     }
-
     @Override
     public boolean onTouchEvent(android.view.MotionEvent event) {
         scaleGestureDetector.onTouchEvent(event);
@@ -286,10 +268,8 @@ public class NorbironSurfaceView extends android.view.SurfaceView implements Run
         } else if (event.getAction() == android.view.MotionEvent.ACTION_MOVE) {
             if (selNb != null) {
                 selNb.setXY(selNb.getX() - (fromsx - x), selNb.getY() - (fromsy - y));
-
                 fromsx = x;
                 fromsy = y;
-
             } else if (Math.abs(fromsx - x) + Math.abs(fromsy - y) > 25) {
                 startsx += (fromsx - x);
                 startsy += (fromsy - y);
